@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Sat Jun 22 11:56:53 CEST 2019
+#Sat Jun 22 13:34:50 CEST 2019
 17.baseType=DIRECTORY
 4.path=flutter_assets/fonts/MaterialIcons-Regular.ttf
 8.set=ASSET
