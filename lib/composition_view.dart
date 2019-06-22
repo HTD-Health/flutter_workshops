@@ -13,7 +13,10 @@ class CompositionView extends StatefulWidget {
   _CompositionViewState createState() => _CompositionViewState();
 }
 
-class _CompositionViewState extends State<CompositionView> with TickerProviderStateMixin {
+class _CompositionViewState extends State<CompositionView>
+    with TickerProviderStateMixin {
+  AnimationController _compressionController;
+  Animation<double> _compressionAnimation;
   final List<Ingredient> _buttons = [
     Ingredient(image: 'images/bread.png'),
     Ingredient(image: 'images/ham.png'),
@@ -30,6 +33,33 @@ class _CompositionViewState extends State<CompositionView> with TickerProviderSt
     Ingredient(),
     Ingredient(),
   ];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    this._compressionController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 500),
+    )..addListener(this._changeState);
+    this._compressionAnimation =
+        Tween<double>(begin: 1, end: 0.25).animate(this._compressionController);
+  }
+
+  @override
+  dispose() {
+    super.dispose();
+    this._compressionController.removeListener(this._changeState);
+  }
+
+  _changeState() {
+    this.setState(() {});
+  }
+
+  _onSubmitClick() {
+    this._compressionController.forward();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +79,7 @@ class _CompositionViewState extends State<CompositionView> with TickerProviderSt
               flex: 8,
               child: ElementsStack(
                 elements: this._element,
-                compressionValue: 1,
+                compressionValue: this._compressionAnimation.value,
               ),
             ),
             Expanded(
@@ -58,7 +88,10 @@ class _CompositionViewState extends State<CompositionView> with TickerProviderSt
                     child: Column(
                   children: <Widget>[
                     AnimationButtonsBar(buttons: this._buttons),
-                    SubmitButton(text: 'Zapisz kanapkę', onPressed: (){},)
+                    SubmitButton(
+                      text: 'Zapisz kanapkę',
+                      onPressed: this._onSubmitClick,
+                    )
                   ],
                 ))),
           ],
