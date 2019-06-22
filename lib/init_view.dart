@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_workshops/components/submit_button.dart';
 
 class InitView extends StatelessWidget {
   const InitView({Key key}) : super(key: key);
@@ -13,7 +14,17 @@ class InitView extends StatelessWidget {
         ),
         centerTitle: true,
         backgroundColor: Colors.white,
-        leading: Image.asset('images/logo.png'),
+      ),
+      body: Container(
+        child: Column(
+          children: <Widget>[
+            Expanded(
+              flex: 8,
+              child: Image.asset('images/sandwitch.png'),
+            ),
+            Expanded(flex: 2, child: SubmitButton(text: 'Stwórz kanapkę', onPressed: () {},),)
+          ],
+        ),
       ),
     );
   }
