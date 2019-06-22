@@ -30,12 +30,13 @@ class _AnimationButtonsBarState extends State<AnimationButtonsBar>
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 70,
+      height: 60,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: this.widget.buttons.length,
         itemBuilder: (BuildContext context, int index) {
           return Draggable<Ingredient>(
+            data: this.widget.buttons[index],
             feedback: FeedbackItem(
               image: this.widget.buttons[index].image,
               controller: this._controller,
